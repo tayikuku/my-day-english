@@ -1,0 +1,41 @@
+My Day at School - TTS Ready Text
+=================================
+
+[Emma - en-US-JennyNeural]
+Hey Tom! How was your first week at our school?
+
+[Tom - en-US-GuyNeural]
+It was great! School starts at 8:30, which is nice.
+
+[Emma - en-US-JennyNeural]
+That's later than my old school. What classes do you have today?
+
+[Tom - en-US-GuyNeural]
+English, math, and history before lunch. How about you?
+
+[Emma - en-US-JennyNeural]
+Science, English, and art. I enjoy science — we did a fun experiment with plants yesterday.
+
+[Tom - en-US-GuyNeural]
+Cool! I like math best. Mr. Brown explains things clearly.
+
+[Emma - en-US-JennyNeural]
+I have him too! Have you tried the cafeteria yet?
+
+[Tom - en-US-GuyNeural]
+Yes! The pizza is great, and there's a salad bar.
+
+[Emma - en-US-JennyNeural]
+Nice. I usually bring lunch from home. Are you doing any after-school activities?
+
+[Tom - en-US-GuyNeural]
+I'm thinking about the photography club. They meet on Wednesdays.
+
+[Emma - en-US-JennyNeural]
+I signed up for volleyball. We practice every Tuesday and Thursday.
+
+[Tom - en-US-GuyNeural]
+Awesome! Oh — there's the bell. We'd better get to class!
+
+[Emma - en-US-JennyNeural]
+Let's go!
