@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Day / 我的一天 — English Listening & Speaking Material</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #dbeafe;
+    --primary-dark: #1e40af;
+    --accent: #f59e0b;
+    --accent-light: #fef3c7;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,.10);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', 'Noto Sans CJK SC', 'WenQuanYi Micro Hei', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 60px;
+  }
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    padding: 40px 30px;
+    border-radius: var(--radius) var(--radius) 0 0;
+    text-align: center;
+  }
+  .header h1 { font-size: 2em; font-weight: 800; margin-bottom: 6px; }
+  .header .subtitle { font-size: 1.1em; opacity: .92; }
+  .header .meta {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin-top: 16px;
+  }
+  .header .badge {
+    background: rgba(255,255,255,.18);
+    padding: 5px 14px; border-radius: 20px; font-size: .85em;
+    backdrop-filter: blur(4px);
+  }
+  /* Main card */
+  .main-card {
+    background: var(--card-bg);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  .section {
+    padding: 28px 30px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+  .section h2 {
+    font-size: 1.35em;
+    color: var(--primary-dark);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section h2 .icon {
+    width: 28px; height: 28px;
+    background: var(--primary-light);
+    border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: .8em;
+  }
+  /* Audio players */
+  .audio-box {
+    background: var(--primary-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .audio-box h3 {
+    font-size: 1em; color: var(--primary-dark);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+  }
+  .audio-box audio { width: 100%; height: 40px; }
+  .audio-meta {
+    font-size: .82em; color: var(--text-muted); margin-top: 6px;
+  }
+  /* Dialogue */
+  .dialogue {
+    background: #fafbfc; border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 12px; overflow: hidden;
+  }
+  .dialogue-line {
+    display: flex; gap: 14px; padding: 10px 8px;
+    transition: background .2s;
+    align-items: flex-start;
+  }
+  .dialogue-line:hover { background: #f1f5f9; border-radius: 10px; }
+  .avatar {
+    flex-shrink: 0;
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .bubble {
+    flex: 1;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 10px 16px;
+    position: relative;
+    font-size: .96em;
+  }
+  .bubble .speaker-name {
+    font-weight: 700; font-size: .82em;
+    margin-bottom: 4px;
+  }
+  .dialogue-line.female .bubble .speaker-name { color: #db2777; }
+  .dialogue-line.male .bubble .speaker-name { color: #2563eb; }
+  .dialogue-line.female .bubble {
+    background: #fdf2f8;
+    border-color: #fbcfe8;
+  }
+  .dialogue-line.male .bubble {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+  }
+  .bubble::before {
+    content: '';
+    position: absolute;
+    top: 16px;
+    width: 0; height: 0;
+    border-style: solid;
+  }
+  .dialogue-line.female .bubble::before {
+    left: -8px;
+    border-width: 7px 8px 7px 0;
+    border-color: transparent #fbcfe8 transparent transparent;
+  }
+  .dialogue-line.male .bubble::before {
+    left: -8px;
+    border-width: 7px 8px 7px 0;
+    border-color: transparent #bfdbfe transparent transparent;
+  }
+  /* Questions */
+  .question {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 12px;
+  }
+  .question .q-num {
+    display: inline-block; background: var(--primary); color: #fff;
+    width: 24px; height: 24px; border-radius: 50%;
+    text-align: center; line-height: 24px; font-size: .8em;
+    margin-right: 8px; font-weight: 700;
+  }
+  .question .q-text { font-size: .98em; }
+  .answer {
+    margin-top: 10px; padding: 12px 16px;
+    background: var(--green-light); border-radius: 8px;
+    font-size: .92em; color: #166534;
+    display: none;
+  }
+  .answer.show { display: block; }
+  .answer strong { color: #15803d; }
+  .toggle-btn {
+    background: var(--accent); color: #fff; border: none;
+    padding: 6px 14px; border-radius: 6px; font-size: .82em;
+    cursor: pointer; margin-top: 10px; transition: opacity .2s;
+    font-weight: 600;
+  }
+  .toggle-btn:hover { opacity: .88; }
+  .toggle-btn.hide-btn { background: var(--text-muted); }
+  /* Keywords */
+  .keywords-table {
+    width: 100%; border-collapse: collapse; font-size: .92em;
+  }
+  .keywords-table th {
+    background: var(--primary-light); color: var(--primary-dark);
+    padding: 10px 14px; text-align: left; font-size: .85em;
+    border-bottom: 2px solid var(--primary);
+  }
+  .keywords-table td {
+    padding: 12px 14px; border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .keywords-table tr:hover td { background: #f8fafc; }
+  .kw-word { font-weight: 700; color: var(--primary-dark); font-size: 1.05em; }
+  .kw-ipa { color: var(--text-muted); font-size: .9em; font-family: 'Doulos SIL','Charis SIL',Georgia,serif; }
+  .kw-cn { color: #c2410c; }
+  .kw-example { font-style: italic; color: #475569; }
+  /* TTS text */
+  .tts-text {
+    background: #1e293b; color: #e2e8f0;
+    border-radius: 10px; padding: 20px 24px;
+    font-family: 'Cascadia Code','Fira Code',Consolas,monospace;
+    font-size: .85em; line-height: 1.8;
+    white-space: pre-wrap; overflow-x: auto;
+  }
+  .tts-text .label { color: #93c5fd; }
+  /* Quality check */
+  .qc-list { list-style: none; }
+  .qc-list li {
+    padding: 8px 0; display: flex; align-items: flex-start; gap: 10px;
+    font-size: .93em; border-bottom: 1px dashed var(--border);
+  }
+  .qc-list li:last-child { border-bottom: none; }
+  .qc-check {
+    color: var(--green); font-weight: 700; flex-shrink: 0;
+    width: 24px; text-align: center;
+  }
+  /* Footer */
+  .footer {
+    text-align: center; padding: 20px; color: var(--text-muted);
+    font-size: .82em;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>My Day / 我的一天</h1>
+    <div class="subtitle">English Listening & Speaking Material</div>
+    <div class="meta">
+      <span class="badge">Topic: School Daily Life</span>
+      <span class="badge">Age: 13–15</span>
+      <span class="badge">CEFR: A2–B1</span>
+      <span class="badge">Duration: ~72s (normal) / ~84s (slow)</span>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="main-card">
+
+    <!-- Audio Section -->
+    <div class="section">
+      <h2><span class="icon">&#128266;</span> Audio Listening</h2>
+      <div class="audio-box">
+        <h3>&#127911; Normal Speed (+0%) — <span style="font-weight:400;font-size:.85em">JennyNeural (F) & GuyNeural (M)</span></h3>
+        <audio controls preload="auto">
+          <source src="my_day_normal.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div class="audio-meta">Duration: 72.2s | Format: MP3 128kbps 24kHz mono | Voices: en-US-JennyNeural &amp; en-US-GuyNeural</div>
+      </div>
+      <div class="audio-box" style="background:var(--accent-light)">
+        <h3>&#128004; Slow Speed (-15%) — for pre-listening &amp; support</h3>
+        <audio controls preload="auto">
+          <source src="my_day_slow.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+        <div class="audio-meta">Duration: 84.2s | Format: MP3 128kbps 24kHz mono | Same voices, reduced speech rate</div>
+      </div>
+    </div>
+
+    <!-- Dialogue Script -->
+    <div class="section">
+      <h2><span class="icon">&#128172;</span> Dialogue Script</h2>
+      <p style="font-size:.88em;color:var(--text-muted);margin-bottom:12px">A natural conversation between two students about school life.</p>
+      <div class="dialogue">
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>Hey Tom! How was your first week at our school?</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>It was great! School starts at 8:30, which is nice.</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>That's later than my old school. What classes do you have today?</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>English, math, and history before lunch. How about you?</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>Science, English, and art. I enjoy science — we did a fun experiment with plants yesterday.</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>Cool! I like math best. Mr. Brown explains things clearly.</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>I have him too! Have you tried the cafeteria yet?</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>Yes! The pizza is great, and there's a salad bar.</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>Nice. I usually bring lunch from home. Are you doing any after-school activities?</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>I'm thinking about the photography club. They meet on Wednesdays.</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>I signed up for volleyball. We practice every Tuesday and Thursday.</div>
+          </div>
+        </div>
+        <div class="dialogue-line male">
+          <div class="avatar"><img src="avatar_tom.jpg" alt="Tom"></div>
+          <div class="bubble">
+            <div class="speaker-name">Tom</div>
+            <div>Awesome! Oh — there's the bell. We'd better get to class!</div>
+          </div>
+        </div>
+        <div class="dialogue-line female">
+          <div class="avatar"><img src="avatar_emma.jpg" alt="Emma"></div>
+          <div class="bubble">
+            <div class="speaker-name">Emma</div>
+            <div>Let's go!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comprehension Questions -->
+    <div class="section">
+      <h2><span class="icon">&#10067;</span> Comprehension Questions</h2>
+      <p style="font-size:.88em;color:var(--text-muted);margin-bottom:14px">Listen to the audio and answer the questions. Click "Show Answer" to check.</p>
+
+      <div class="question">
+        <div class="q-text"><span class="q-num">1</span>What time does school start, and how does Emma feel about it compared to her old school?</div>
+        <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer"><strong>Answer:</strong> School starts at 8:30. Emma thinks it's later than her old school (her old school started earlier).</div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-num">2</span>What is Tom's favorite class, and why does he like it?</div>
+        <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer"><strong>Answer:</strong> Tom's favorite class is math. He likes it because Mr. Brown explains things clearly.</div>
+      </div>
+
+      <div class="question">
+        <div class="q-text"><span class="q-num">3</span>What after-school activities are Emma and Tom involved in?</div>
+        <button class="toggle-btn" onclick="toggleAnswer(this)">Show Answer</button>
+        <div class="answer"><strong>Answer:</strong> Emma signed up for volleyball (they practice every Tuesday and Thursday). Tom is thinking about joining the photography club (they meet on Wednesdays).</div>
+      </div>
+    </div>
+
+    <!-- Keywords -->
+    <div class="section">
+      <h2><span class="icon">&#128218;</span> Key Vocabulary (5 Words)</h2>
+      <table class="keywords-table">
+        <thead>
+          <tr>
+            <th style="width:18%">Word</th>
+            <th style="width:20%">Pronunciation</th>
+            <th style="width:12%">中文释义</th>
+            <th>Example Sentence</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="kw-word">experiment</td>
+            <td class="kw-ipa">/ɪkˈspɛrɪmənt/</td>
+            <td class="kw-cn">实验</td>
+            <td class="kw-example">We did a fun experiment with plants in science class.</td>
+          </tr>
+          <tr>
+            <td class="kw-word">cafeteria</td>
+            <td class="kw-ipa">/ˌkæfəˈtɪəriə/</td>
+            <td class="kw-cn">食堂</td>
+            <td class="kw-example">The school cafeteria serves pizza for lunch.</td>
+          </tr>
+          <tr>
+            <td class="kw-word">volleyball</td>
+            <td class="kw-ipa">/ˈvɒliˌbɔːl/</td>
+            <td class="kw-cn">排球</td>
+            <td class="kw-example">I play volleyball every Tuesday after school.</td>
+          </tr>
+          <tr>
+            <td class="kw-word">photography</td>
+            <td class="kw-ipa">/fəˈtɒɡrəfi/</td>
+            <td class="kw-cn">摄影</td>
+            <td class="kw-example">The photography club meets on Wednesdays.</td>
+          </tr>
+          <tr>
+            <td class="kw-word">practice</td>
+            <td class="kw-ipa">/ˈpræktɪs/</td>
+            <td class="kw-cn">练习</td>
+            <td class="kw-example">We practice volleyball twice a week.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TTS Text -->
+    <div class="section">
+      <h2><span class="icon">&#128193;</span> TTS-Ready Plain Text</h2>
+      <p style="font-size:.88em;color:var(--text-muted);margin-bottom:12px">Plain-text version with voice labels for TTS engines. Also available as: <code>my_day_tts_text.txt</code></p>
+      <div class="tts-text"><span class="label">[Emma - en-US-JennyNeural]</span>
+Hey Tom! How was your first week at our school?
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+It was great! School starts at 8:30, which is nice.
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+That's later than my old school. What classes do you have today?
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+English, math, and history before lunch. How about you?
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+Science, English, and art. I enjoy science — we did a fun experiment with plants yesterday.
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+Cool! I like math best. Mr. Brown explains things clearly.
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+I have him too! Have you tried the cafeteria yet?
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+Yes! The pizza is great, and there's a salad bar.
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+Nice. I usually bring lunch from home. Are you doing any after-school activities?
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+I'm thinking about the photography club. They meet on Wednesdays.
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+I signed up for volleyball. We practice every Tuesday and Thursday.
+
+<span class="label">[Tom - en-US-GuyNeural]</span>
+Awesome! Oh — there's the bell. We'd better get to class!
+
+<span class="label">[Emma - en-US-JennyNeural]</span>
+Let's go!</div>
+    </div>
+
+    <!-- Quality Check -->
+    <div class="section">
+      <h2><span class="icon">&#9989;</span> Quality Checklist</h2>
+      <ul class="qc-list">
+        <li><span class="qc-check">&#10003;</span><div><strong>Duration:</strong> Normal speed 72.2s (within 60–75s target); slow speed 84.2s (-15% rate as specified).</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Difficulty:</strong> A2–B1 level — simple present tense with some past tense ("was," "did"), common vocabulary, short sentences suitable for 13–15 year olds.</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Facts:</strong> No real-world school facts used — all details (8:30 start, Mr. Brown, cafeteria pizza, volleyball/photography clubs) are fictional and generic.</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Question answerability:</strong> All 3 questions can be answered directly from the dialogue content.</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Voice distinction:</strong> Female voice (en-US-JennyNeural) for Emma; male voice (en-US-GuyNeural) for Tom — clearly distinguishable.</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Audio integrity:</strong> Both MP3 files verified — codec MP3, 24kHz mono, 128kbps, file sizes 1.2MB (normal) / 1.3MB (slow).</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Natural dialogue:</strong> Back-and-forth conversation with fillers ("Hey," "Cool," "Awesome"), turn-taking, and natural topic transitions — not a textbook monologue.</div></li>
+        <li><span class="qc-check">&#10003;</span><div><strong>Topic coverage:</strong> School schedule (8:30 start), classes (English, math, history, science, art), lunch (cafeteria, pizza, salad bar, homemade), and extracurriculars (volleyball, photography club).</div></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    Generated with Edge TTS (en-US-JennyNeural &amp; en-US-GuyNeural) | For classroom use | 2026
+  </div>
+
+</div>
+  <script>
+    function toggleAnswer(btn) {
+      var answer = btn.nextElementSibling;
+      if (answer.classList.contains('show')) {
+        answer.classList.remove('show');
+        btn.textContent = 'Show Answer';
+        btn.classList.remove('hide-btn');
+      } else {
+        answer.classList.add('show');
+        btn.textContent = 'Hide Answer';
+        btn.classList.add('hide-btn');
+      }
+    }
+  </script>
+</body>
+</html>
